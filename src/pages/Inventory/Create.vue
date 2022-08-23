@@ -1,4 +1,3 @@
-<script setup></script>
 <template>
   <p>name</p>
   <input type="string" v-model="name" />
@@ -6,32 +5,22 @@
   <input type="string" v-model="productCode" />
   <p>price</p>
   <input type="number" v-model="price" />
-  <p>actual amount</p>
-  <input type="number" v-model="actualAmount" />
   <p>minimum amount</p>
   <input type="number" v-model="minimumAmount" /><br />
-  <button @click="addItem()">submit</button>
+  <button @click="$router.push('/')">Annuleren</button>
+  <button @click="addItem()">Toevoegen</button>
 </template>
 
-<script>
+<script setup>
 import { ref, onMounted } from "vue";
 import { useInventoryStore } from "../../store/Inventory.js";
 import { storeToRefs } from "pinia";
-export default {
-  setup() {
-    const store = useInventoryStore();
-    const { inventory, price, name, productCode, actualAmount, minimumAmount } =
-      storeToRefs(store);
-    const { addItem } = store;
-    return {
-      inventory,
-      addItem,
-      price,
-      name,
-      productCode,
-      actualAmount,
-      minimumAmount,
-    };
-  },
-};
+
+const store = useInventoryStore();
+const { inventory, price, name, productCode, minimumAmount } =
+  storeToRefs(store);
+const { addItem, cleanData, back } = store;
+onMounted(() => {
+  cleanData();
+});
 </script>

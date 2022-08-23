@@ -8,7 +8,6 @@ import HelloWorld from "./components/HelloWorld.vue";
   <ul>
     <li><router-link to="/">Home</router-link></li>
     <li><router-link to="/create">Create</router-link></li>
-    <li><router-link to="/edit">Edit</router-link></li>
     <li><router-link to="/order">order</router-link></li>
   </ul>
   <router-view></router-view>

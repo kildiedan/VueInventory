@@ -6,10 +6,10 @@ import Order from '../pages/Inventory/Order.vue'
 
 
 const routes = [
-  { path: '/', component: Overview },
-  { path: '/edit', component: Edit },
-  { path: '/create', component: Create },
-  { path: '/order', component: Order },
+  { path: '/', name: 'home', component: Overview },
+  { path: '/edit/:index', name: 'edit', component: Edit },
+  { path: '/create', name: 'create', component: Create },
+  { path: '/order', name: 'order', component: Order },
 ]
 
 export default function (history) {
