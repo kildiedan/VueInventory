@@ -47,6 +47,8 @@ import { useRoute } from "vue-router";
 
 const store = useInventoryStore();
 const { inventory } = storeToRefs(store);
+// TODO: gebruik van backup en revert methods in store zijn omslachtig; gooi deze weg en maak een getter waarmee je een item via zijn id
+// op kunt vragen en bewerken
 const { backup, revert } = store;
 const route = useRoute();
 onMounted(() => {

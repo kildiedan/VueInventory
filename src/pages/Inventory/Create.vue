@@ -21,6 +21,7 @@ const { inventory, price, name, productCode, minimumAmount } =
   storeToRefs(store);
 const { addItem, cleanData, back } = store;
 onMounted(() => {
+  // cleanData method kan weg uit store: voeg een leeg object via ref in dit component toe die je in aan de state toevoegt
   cleanData();
 });
 </script>
