@@ -9,33 +9,20 @@
     </tr>
     <tr>
       <td>
-        <input
-          type="string"
-          v-model="inventory[$route.params.index].productCode"
-        />
+        <input type="string" v-model="inventory.productCode" />
       </td>
       <td>
-        <input type="string" v-model="inventory[$route.params.index].name" />
+        <input type="string" v-model="inventory.name" />
       </td>
       <td>
-        <input
-          type="number"
-          v-model="inventory[$route.params.index].minimumAmount"
-        />
+        <input type="number" v-model="inventory.minimumAmount" />
       </td>
       <td>
-        <input type="number" v-model="inventory[$route.params.index].price" />
+        <input type="number" v-model="inventory.price" />
       </td>
     </tr>
   </table>
-  <button
-    @click="
-      $router.push('/');
-      revert(route.params.index);
-    "
-  >
-    Annuleren
-  </button>
+  <button @click="$router.push('/')">Annuleren</button>
   <button @click="$router.push('/')">Aanpassen</button>
 </template>
 
@@ -46,12 +33,11 @@ import { storeToRefs } from "pinia";
 import { useRoute } from "vue-router";
 
 const store = useInventoryStore();
-const { inventory } = storeToRefs(store);
-// TODO: gebruik van backup en revert methods in store zijn omslachtig; gooi deze weg en maak een getter waarmee je een item via zijn id
-// op kunt vragen en bewerken
 const { backup, revert } = store;
+const { inventoryItem } = storeToRefs(store);
 const route = useRoute();
-onMounted(() => {
-  backup(route.params.index);
-});
+const inventoryId = 2;
+// const inventoryId = ref(route.params.id);
+console.log(inventoryId);
+const inventory = store.getById(inventoryId);
 </script>

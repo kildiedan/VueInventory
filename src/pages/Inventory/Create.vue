@@ -1,14 +1,21 @@
 <template>
   <p>name</p>
-  <input type="string" v-model="name" />
+  <input type="string" v-model="inventory.name" />
   <p>product code</p>
-  <input type="string" v-model="productCode" />
+  <input type="string" v-model="inventory.productCode" />
   <p>price</p>
-  <input type="number" v-model="price" />
+  <input type="number" v-model="inventory.price" />
   <p>minimum amount</p>
-  <input type="number" v-model="minimumAmount" /><br />
+  <input type="number" v-model="inventory.minimumAmount" /><br />
   <button @click="$router.push('/')">Annuleren</button>
-  <button @click="addItem()">Toevoegen</button>
+  <button
+    @click="
+      addItem(inventory);
+      $router.push('/');
+    "
+  >
+    Toevoegen
+  </button>
 </template>
 
 <script setup>
@@ -17,11 +24,11 @@ import { useInventoryStore } from "../../store/Inventory.js";
 import { storeToRefs } from "pinia";
 
 const store = useInventoryStore();
-const { inventory, price, name, productCode, minimumAmount } =
-  storeToRefs(store);
-const { addItem, cleanData, back } = store;
-onMounted(() => {
-  // cleanData method kan weg uit store: voeg een leeg object via ref in dit component toe die je in aan de state toevoegt
-  cleanData();
+const inventory = ref({
+  name: "",
+  price: 0,
+  minimumAmount: 0,
+  productCode: "",
 });
+const { addItem, cleanData, back } = store;
 </script>

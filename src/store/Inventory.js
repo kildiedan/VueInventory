@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import { resolveTransitionHooks } from 'vue';
 
 export const useInventoryStore = defineStore('inventory-store', {
     id: 'inventory',
@@ -60,6 +59,7 @@ export const useInventoryStore = defineStore('inventory-store', {
       minimumAmount: 1343,
       price: 1,
     },],
+    inventoryItem: null,
     nextId: 8,
     price: 0,
     minimumAmount: 0,
@@ -74,35 +74,22 @@ export const useInventoryStore = defineStore('inventory-store', {
         return total + (currentValue.price * Math.max(currentValue.minimumAmount - currentValue.actualAmount, 0 ))
       }, 0);
    },
+   getInventoryById: (state) => {
+    return (inventoryId) => state.inventory.find((item) => item.id === inventoryId)
+    
+  },
+  getById: state =>  id => state.inventory.find(item => item.id === id),
 },
   actions: {
-    addItem() {
-      this.inventory.push({ name: this.name, id: this.nextId++, price: this.price, minimumAmount: this.minimumAmount, productCode: this.productCode })
-      this.price = 0;
-      this.minimumAmount = 0;
-      this.name = "";
-      this.productCode = 0;
+    addItem(payload) {
+      this.inventory.push({ name: payload.name, id: this.nextId++, price: payload.price, minimumAmount: payload.minimumAmount, productCode: payload.productCode, actualAmount: 0 })
+      
     },
     deleteItem(index){
       this.inventory.splice(index, 1)
     },
-    cleanData() {
-      this.price = 0;
-      this.minimumAmount = 0;
-      this.name = "";
-      this.productCode = 0;
-    },
-    backup(index){
-      this.price = this.inventory[index].price;
-      this.minimumAmount = this.inventory[index].minimumAmount;
-      this.name = this.inventory[index].name;
-      this.productCode = this.inventory[index].productCode;
-    },
-    revert(index){
-      this.inventory[index].price = this.price;
-      this.inventory[index].minimumAmount = this.minimumAmount;
-      this.inventory[index].name = this.name;
-      this.inventory[index].productCode = this.productCode;
+    updateItem(payload, id){
+
     }
   },
   

@@ -14,7 +14,7 @@
       <td>{{ item.minimumAmount }}</td>
       <td>
         <button
-          @click="$router.push({ name: 'edit', params: { index: index } })"
+          @click="$router.push({ name: 'edit', params: { id: item.id } })"
         >
           edit
         </button>
